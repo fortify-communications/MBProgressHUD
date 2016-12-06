@@ -96,9 +96,8 @@ static const CGFloat MBDefaultDetailsLabelFontSize = 12.f;
     _opacity = 1.f;
     _defaultMotionEffectsEnabled = YES;
 
-    // Default color, depending on the current iOS version
-    BOOL isLegacy = kCFCoreFoundationVersionNumber < kCFCoreFoundationVersionNumber_iOS_7_0;
-    _contentColor = isLegacy ? [UIColor whiteColor] : [UIColor colorWithWhite:0.f alpha:0.7f];
+    // Default color, always white
+    _contentColor = [UIColor whiteColor]
     // Transparent background
     self.opaque = NO;
     self.backgroundColor = [UIColor clearColor];
@@ -323,7 +322,7 @@ static const CGFloat MBDefaultDetailsLabelFontSize = 12.f;
 
     MBBackgroundView *bezelView = [MBBackgroundView new];
     bezelView.translatesAutoresizingMaskIntoConstraints = NO;
-    bezelView.layer.cornerRadius = 5.f;
+    bezelView.layer.cornerRadius = 10.f;
     bezelView.alpha = 0.f;
     [self addSubview:bezelView];
     _bezelView = bezelView;
@@ -1105,17 +1104,8 @@ static const CGFloat MBDefaultDetailsLabelFontSize = 12.f;
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if ((self = [super initWithFrame:frame])) {
-        if (kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iOS_7_0) {
-            _style = MBProgressHUDBackgroundStyleBlur;
-            if (kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iOS_8_0) {
-                _color = [UIColor colorWithWhite:0.8f alpha:0.6f];
-            } else {
-                _color = [UIColor colorWithWhite:0.95f alpha:0.6f];
-            }
-        } else {
-            _style = MBProgressHUDBackgroundStyleSolidColor;
-            _color = [[UIColor blackColor] colorWithAlphaComponent:0.8];
-        }
+        _style = MBProgressHUDBackgroundStyleSolidColor;
+        _color = [[UIColor blackColor] colorWithAlphaComponent:0.8];
 
         self.clipsToBounds = YES;
 
