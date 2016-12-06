@@ -97,7 +97,7 @@ static const CGFloat MBDefaultDetailsLabelFontSize = 12.f;
     _defaultMotionEffectsEnabled = YES;
 
     // Default color, always white
-    _contentColor = [UIColor whiteColor]
+    _contentColor = [UIColor whiteColor];
     // Transparent background
     self.opaque = NO;
     self.backgroundColor = [UIColor clearColor];
